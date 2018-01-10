@@ -14,7 +14,9 @@ env:
 
   matrix:
     - BROWSER=chrome  BVER=stable
+    - BROWSER=chrome  BVER=stable CHROMEEXPERIMENT=false
     - BROWSER=chrome  BVER=beta
+    - BROWSER=chrome  BVER=beta CHROMEEXPERIMENT=false
     - BROWSER=chrome  BVER=unstable
     - BROWSER=firefox BVER=stable
     - BROWSER=firefox BVER=beta
@@ -29,7 +31,8 @@ matrix:
     - env: BROWSER=firefox BVER=nightly
 
 before_script:
-  - ./node_modules/travis-multirunner/setup.sh
+  - export CHROME_BIN=browsers/bin/chrome-${BVER}
+  - export FIREFOX_BIN=browsers/bin/firefox-${BVER}
   - sh -e /etc/init.d/xvfb start
   - pulseaudio --start
 
